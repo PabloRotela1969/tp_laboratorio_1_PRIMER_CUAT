@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1586139554 source:c:\proyectos\c\tp1\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	"Funciones.h"
+
+1586139471 c:\proyectos\c\tp1\funciones.h
+	<stdio.h>
+	<stdlib.h>
+
