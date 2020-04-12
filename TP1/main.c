@@ -1,71 +1,101 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
-#include "Funciones.h" /* librería de funciones matemáticas */
+#include "Funciones.h";
 
 int main()
 {
-    // números que ingresa el usuario
-    int numero1;
-    int numero2;
-    // carácter que representa la operación ingresada por el usuario
-    char operacion;
-    // variable bandera usada para validar ingreso de operación
-    bool mal = true;
+    // para recoger los numeros
+    int numero1 = 0;
+    int numero2 = 0;
 
+    // operaciones matematicas
+    int suma;
+    int resta;
+    int multiplicacion;
+    float division;
+    int factor1;
+    int factor2;
 
-    printf(" Ingrese el primer numero : ");
-    scanf("%d", &numero1);
+    // para el menu
+    int opcion;
 
-    printf("\n Ingrese el segundo numero : ");
-    scanf("%d", &numero2);
-
-    // validación de ingreso de función y cálculo de función
+    // menú
     do
     {
-        mal = false;
-        fflush(stdin);
-        printf("\n Elija una operacion entre las siguientes : +, - , * , / , ! : ");
-        scanf("%c", &operacion);
+        printf("\n1 - Ingresar 1er operando\n");
+        printf("2 - Ingresar 2do operando\n");
+        printf("3 - Calcular todas las operaciones\n");
+        printf("4 - Informar resultados\n");
+        printf("5 - Salir\n");
+        printf(" Ingrese una opcion :");
+        scanf(" %d", &opcion);
 
-        switch(operacion)
+        switch(opcion)
         {
-        case '+':
+        case 1:
+                // ingreso del primer numero
+                printf("Favor de ingresar el primer numero : ");
+                scanf(" %d",&numero1);
+                fflush(stdin);
+            break;
+        case 2:
+                // ingreso del segundo numero
+                printf("Favor de ingresar el SEGUNDO numero : ");
+                scanf(" %d",&numero2);
+                fflush(stdin);
+            break;
+        case 3:
+                // calculo de todas las operaciones matematicas solicitadas con los numeros disponibles
+                suma = sumar(numero1,numero2);
+                resta = restar(numero1,numero2);
+                multiplicacion = multiplicar(numero1,numero2);
+                division = dividir(numero1,numero2);
+                factor1 = factorial(numero1);
+                factor2 = factorial(numero2);
+            break;
+        case 4:
+                // muestra de todos los resultados de las operaciones matematicas con los numeros disponibles
+                printf("El resultado de %d + %d es: %d \n", numero1,numero2,suma);
+                printf("El resultado de %d - %d es: %d \n", numero1,numero2,resta);
 
-            printf(" %d %c %d = %d \n" , numero1,operacion,numero2,suma(numero1,numero2));
+                if(numero2 != 0)
+                {
+                    printf("El resultado de %d / %d es: %f \n", numero1,numero2,division);
+                }
+                else
+                {
+                    printf("\nNo es posible dividir por cero\n");
+                }
+                printf("El resultado de %d * %d es: %d \n", numero1,numero2,multiplicacion);
+
+                if(numero1 >= 0)
+                {
+                    printf("El resultado de %d! es: %d \n", numero1,factor1);
+                }
+                else
+                {
+                    printf("\nNo se puede extraer el factorial a un numero negativo\n");
+                }
+
+                if(numero2 >= 0)
+                {
+                    printf("El resultado de %d! es: %d \n", numero2,factor2);
+                }
+                else
+                {
+                    printf("\nNo se puede extraer el factorial a un numero negativo\n");
+                }
             break;
-        case '-':
-            printf(" %d %c %d = %d \n" , numero1,operacion,numero2,resta(numero1,numero2));
-            break;
-        case '*':
-            printf(" %d %c %d = %d \n" , numero1,operacion,numero2,multiplicacion(numero1,numero2));
-            break;
-        case '/':
-            // valido que el denominador sea distinto de cero
-            if (numero2 > 0)
-            {
-                printf(" %d %c %d = %f \n" , numero1,operacion,numero2,division(numero1,numero2));
-            }
-            else
-            {
-                printf("No se puede dividir por cero \n");
-            }
-            break;
-        case '!':
-            printf(" %c%d = %d y el " , operacion,numero1,factorial(numero1));
-            printf(" %c%d = %d \n" , operacion,numero2,factorial(numero2));
+        case 5:
+            // salida
             break;
         default:
-            mal = true;
-            // no se ingresó ningún caracter de función contemplado, muestro error
-            printf("Tenga en bien ingresar los signos de operacion requeridos");
+            // validacion del menu
+            printf("\nFavor de elegir un numero entre 1 y 5, gracias\n");
             break;
         }
-    // si no se ingresó ninguno de los caracteres, vuelvo a iterar y pido volver a ingresar
-    }while(mal);
-
-
-    system("Pause");
+    }
+    while(opcion != 5);
 
     return 0;
 }
